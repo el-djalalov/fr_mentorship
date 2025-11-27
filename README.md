@@ -1,348 +1,797 @@
-# Frontend Development Mentorship - Mentor's Guide
+# Frontend Development Learning Guide
 
-## 🎯 Project Overview
+## 👋 Welcome!
 
-This repository contains **complete, working reference implementations** for your 6-session frontend mentorship program. Each project builds progressively, showing the same TaskMaster application implemented with different technologies.
+This repository contains a complete learning path for frontend development. You'll build the **same TaskMaster application** three different ways, learning new concepts at each stage.
 
-## 📁 Repository Structure
+## 🎯 Learning Philosophy
 
-```
-fr_mentorship/
-├── plan.md                          # Your original mentorship curriculum (git ignored)
-├── session-1-2-html-css/           # Static HTML/CSS version
-│   ├── index.html                  # Full semantic HTML with layout
-│   └── styles.css                  # Comprehensive CSS with comments
-├── session-2-vanilla-js/           # Interactive JavaScript version
-│   ├── index.html                  # Dynamic HTML structure
-│   ├── styles.css                  # Extended styles for modals/states
-│   └── app.js                      # Full CRUD with localStorage
-└── session-3-6-react-app/          # Complete React application
-    ├── src/
-    │   ├── components/             # Reusable UI components
-    │   ├── context/                # Global state management
-    │   ├── hooks/                  # Custom React hooks
-    │   ├── pages/                  # Route pages
-    │   └── App.jsx                 # Main app with routing
-    └── package.json
-```
+**Learn by doing.** Each session combines:
+- 📖 Theory and concepts
+- 💻 Live coding demonstrations
+- 🛠️ Hands-on practice
+- 📝 Homework assignments
 
-## 🗓️ Session-by-Session Guide
-
-### Session 1: HTML, CSS & Layout Fundamentals (2.5 hours)
-
-**Reference:** `session-1-2-html-css/`
-
-#### What to Teach:
-1. **Browser Rendering Pipeline** (15 min)
-   - Show DevTools Network tab
-   - Explain HTML parsing → DOM construction → CSSOM → Render tree
-   - Demo: Change CSS and watch repaint in Performance tab
-
-2. **Flexbox Deep Dive** (30 min)
-   - Show navbar in code: `justify-content`, `align-items`, `gap`
-   - Live code: Build a card layout from scratch
-   - Common patterns: centering, space-between, wrap
-
-3. **CSS Grid Deep Dive** (30 min)
-   - Show dashboard layout: `grid-template-columns`, `grid-template-areas`
-   - Live code: Create a photo gallery grid
-   - Responsive grids: `repeat(auto-fit, minmax())`
-
-4. **Mob Coding Exercise** (20 min)
-   - Together: Build a responsive pricing cards section
-   - Practice: Flexbox cards that become grid on desktop
-
-#### Key Teaching Points:
-- **CSS Custom Properties:** Explain they're like constants - reusability!
-- **Box Model:** Show DevTools visual box model
-- **Specificity:** ID > Class > Element (demo with examples)
-- **Mobile-First:** Start with mobile styles, enhance with media queries
-
-#### Common Student Questions:
-- *"When should I use Flexbox vs Grid?"* → Flexbox for 1D (rows/columns), Grid for 2D layouts
-- *"Why use semantic HTML?"* → Accessibility, SEO, maintainability
-- *"What's the difference between margin and padding?"* → Show box model diagram
-
-#### Files to Reference:
-- [index.html](session-1-2-html-css/index.html) - Lines 10-45: Semantic structure
-- [styles.css](session-1-2-html-css/styles.css) - Lines 97-150: Flexbox & Grid patterns
+By the end, you'll confidently build and deploy frontend applications.
 
 ---
 
-### Session 2: JavaScript in the Browser (2.5 hours)
+## 📚 Course Structure
 
-**Reference:** `session-2-vanilla-js/`
+### Week 1: Foundations
 
-#### What to Teach:
-1. **DOM Manipulation** (30 min)
-   - `document.querySelector()` vs `getElementById()`
-   - Creating elements: `createElement()`, `appendChild()`
-   - Template literals for dynamic HTML
-   - DocumentFragment for performance
+#### Session 1: HTML, CSS & Layout (2.5 hours)
+**What you'll learn:**
+- Semantic HTML structure
+- Flexbox for one-dimensional layouts
+- CSS Grid for two-dimensional layouts
+- Responsive design with media queries
+- CSS Custom Properties (CSS Variables)
 
-2. **Event Handling** (30 min)
-   - Click, input, submit events
-   - `event.preventDefault()`, `event.target`
-   - Event delegation (ONE listener on parent, not many on children)
-   - Data attributes for metadata (`data-task-id`)
+**Project:** Static TaskMaster interface
 
-3. **Fetch API & Async/Await** (30 min)
-   - HTTP GET requests
-   - JSON parsing
-   - Error handling with try/catch
-   - Loading states
+**Homework:** Build a responsive portfolio page (3-4 hours)
 
-4. **Mob Coding** (25 min)
-   - Build: User list that filters as you type
-   - Use: fetch, filter, render pattern
+#### Session 2: JavaScript in the Browser (2.5 hours)
+**What you'll learn:**
+- DOM manipulation (selecting, creating, modifying elements)
+- Event handling (clicks, inputs, forms)
+- Fetch API for loading data
+- LocalStorage for data persistence
+- Array methods (filter, map, reduce)
 
-#### Key Teaching Points:
-- **Event Delegation:** Explain why it's more efficient than individual listeners
-- **Array Methods:** `filter`, `map`, `reduce` - functional programming concepts
-- **Promises vs Async/Await:** Show both syntaxes, recommend async/await for readability
-- **LocalStorage:** Simple key-value store, JSON.stringify/parse
+**Project:** Interactive TaskMaster with full CRUD
 
-#### Code Walkthrough:
-Walk through `app.js` in this order:
-1. Lines 18-60: State management (like a mini-database)
-2. Lines 88-140: CRUD operations (compare to backend services)
-3. Lines 215-280: DOM rendering (like React's render)
-4. Lines 430-490: Event delegation pattern
+**Homework:** Build a searchable user directory (4-5 hours)
 
-#### Common Pitfalls:
-- Forgetting `e.preventDefault()` on form submit → page reloads
-- Mutating arrays directly instead of creating new ones
-- Not handling errors in fetch → silent failures
-- Adding event listeners in loops → memory leaks
+#### Session 3: Modern Tooling & React (3 hours)
+**What you'll learn:**
+- Why build tools exist (Vite)
+- React fundamentals (Components, JSX)
+- Props and component composition
+- Rendering lists
+- Component-based thinking
 
-#### Backend Dev Bridge:
-> "Think of the DOM as an in-memory database that renders visually. When you modify it, the browser 'commits' the changes (repaint). Events are like webhooks - something happens, you respond."
+**Project:** TaskMaster in React (basic components)
+
+**Homework:** Start your capstone project in React (5-6 hours)
+
+### Week 2: Advanced React
+
+#### Session 4: State & Data Flow (2.5 hours)
+**What you'll learn:**
+- useState for local state
+- useReducer for complex state
+- Context API for global state
+- Controlled forms
+- Lifting state up
+
+**Project:** Add state management to TaskMaster
+
+**Homework:** Add full CRUD to your capstone (4-5 hours)
+
+#### Session 5: Effects, Routing & Custom Hooks (3 hours)
+**What you'll learn:**
+- useEffect for side effects
+- Custom hooks (reusable logic)
+- React Router for navigation
+- Data fetching patterns
+- URL parameters
+
+**Project:** Multi-page TaskMaster with routing
+
+**Homework:** Add routing and API integration (5-6 hours)
+
+#### Session 6: Styling, Polish & Deployment (3 hours)
+**What you'll learn:**
+- Tailwind CSS utility-first styling
+- Loading and error states
+- Animations and transitions
+- Deployment to Vercel
+
+**Project:** Polished, deployed TaskMaster
+
+**Homework:** Complete and deploy your capstone (4-6 hours)
 
 ---
 
-### Session 3: Modern Tooling & React Introduction (3 hours)
+## 🚀 How to Use This Repository
 
-**Reference:** `session-3-6-react-app/`
+### Prerequisites
 
-#### What to Teach:
-1. **Why Build Tools?** (20 min)
-   - ES6 modules: `import`/`export`
-   - JSX needs compilation (it's not HTML!)
-   - Hot Module Replacement (HMR) for fast development
-   - Code splitting & optimization
+Before starting, install:
+- [Node.js v18+](https://nodejs.org) - JavaScript runtime
+- [VS Code](https://code.visualstudio.com/) - Code editor
+- VS Code Extensions:
+  - ESLint
+  - Prettier
+  - Live Server
 
-2. **Vite Setup** (15 min)
-   ```bash
-   npm create vite@latest my-app -- --template react
-   cd my-app
-   npm install
-   npm run dev
+Verify installation:
+```bash
+node -v    # Should show v18 or higher
+npm -v     # Should show 9 or higher
+```
+
+### Repository Structure
+
+```
+📁 session-1-2-html-css/     ← Sessions 1-2 reference
+📁 session-2-vanilla-js/     ← Session 2 reference
+📁 session-3-6-react-app/    ← Sessions 3-6 reference
+📄 STUDENT_GUIDE.md          ← You are here!
+```
+
+**Important:** These are **reference implementations**. Don't copy-paste! Use them to:
+1. Understand the concepts
+2. See working examples
+3. Compare with your own solutions
+4. Debug when stuck
+
+---
+
+## 📖 Session-by-Session Guide
+
+### Session 1: HTML & CSS
+
+#### Concepts Covered
+
+**1. Semantic HTML**
+```html
+<!-- ❌ Bad: No meaning -->
+<div class="header">
+  <div class="nav">...</div>
+</div>
+
+<!-- ✅ Good: Semantic elements -->
+<header>
+  <nav>...</nav>
+</header>
+```
+
+**Why?** Screen readers, SEO, code readability
+
+**2. Flexbox (1D Layouts)**
+```css
+/* Perfect for: navbars, button groups, cards in a row */
+.navbar {
+  display: flex;
+  justify-content: space-between;  /* Space items evenly */
+  align-items: center;             /* Vertically center */
+  gap: 1rem;                       /* Space between items */
+}
+```
+
+**3. CSS Grid (2D Layouts)**
+```css
+/* Perfect for: dashboards, galleries, complex layouts */
+.dashboard {
+  display: grid;
+  grid-template-columns: 250px 1fr;  /* Sidebar + content */
+  gap: 2rem;
+}
+```
+
+**4. CSS Custom Properties**
+```css
+:root {
+  --color-primary: #3b82f6;
+  --spacing-md: 1rem;
+}
+
+.button {
+  background: var(--color-primary);
+  padding: var(--spacing-md);
+}
+```
+
+**Why?** Consistency, easy theming, maintainability
+
+#### Practice Tasks
+
+1. **Explore the code:** Open `session-1-2-html-css/index.html` and `styles.css`
+2. **Modify colors:** Change the CSS custom properties and see the theme update
+3. **Experiment:** Try changing `flex-direction`, `grid-template-columns`
+4. **DevTools:** Inspect elements, modify styles live
+
+#### Common Questions
+
+**Q: When should I use Flexbox vs Grid?**
+- Flexbox: One-dimensional (row OR column)
+- Grid: Two-dimensional (rows AND columns)
+
+**Q: What's the box model?**
+- Content → Padding → Border → Margin
+- Use DevTools to visualize it!
+
+**Q: Why mobile-first?**
+- Easier to add complexity than remove it
+- Better performance on mobile
+
+#### Resources
+- [Flexbox Froggy](https://flexboxfroggy.com/) - Interactive game
+- [Grid Garden](https://cssgridgarden.com/) - Interactive game
+- [MDN: CSS Basics](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics)
+
+---
+
+### Session 2: JavaScript in the Browser
+
+#### Concepts Covered
+
+**1. DOM Manipulation**
+```javascript
+// CONCEPT: The DOM is an in-memory tree structure of your HTML
+
+// Selecting elements
+const button = document.querySelector('.btn');
+const cards = document.querySelectorAll('.card');
+
+// Creating elements
+const newCard = document.createElement('div');
+newCard.className = 'card';
+newCard.innerHTML = '<h3>Title</h3>';
+
+// Adding to page
+document.getElementById('container').appendChild(newCard);
+```
+
+**2. Event Handling**
+```javascript
+// CONCEPT: Events are actions that happen in the browser
+
+// Basic event listener
+button.addEventListener('click', () => {
+  console.log('Button clicked!');
+});
+
+// Form handling
+form.addEventListener('submit', (e) => {
+  e.preventDefault();  // Stop page reload!
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData);
+  console.log(data);
+});
+```
+
+**3. Event Delegation (Important!)**
+```javascript
+// CONCEPT: Add ONE listener to parent instead of many to children
+
+// ❌ Bad: Listener on every card (memory leak if cards are dynamic)
+cards.forEach(card => {
+  card.addEventListener('click', handleClick);
+});
+
+// ✅ Good: One listener on parent
+container.addEventListener('click', (e) => {
+  const card = e.target.closest('.card');
+  if (card) handleClick(card);
+});
+```
+
+**4. Fetch API (Async/Await)**
+```javascript
+// CONCEPT: Load data from servers without page reload
+
+async function fetchUsers() {
+  try {
+    // Make HTTP request
+    const response = await fetch('https://api.example.com/users');
+
+    // Check if successful
+    if (!response.ok) throw new Error('Failed to fetch');
+
+    // Parse JSON
+    const users = await response.json();
+
+    // Use the data
+    renderUsers(users);
+  } catch (error) {
+    // Handle errors
+    console.error('Error:', error);
+    showError(error.message);
+  }
+}
+```
+
+**5. Array Methods (Functional Programming)**
+```javascript
+// CONCEPT: Transform data without loops
+
+const tasks = [
+  { id: 1, title: 'Task 1', status: 'pending' },
+  { id: 2, title: 'Task 2', status: 'completed' },
+  { id: 3, title: 'Task 3', status: 'pending' }
+];
+
+// filter: Get subset of array
+const pending = tasks.filter(task => task.status === 'pending');
+// Result: [{ id: 1, ... }, { id: 3, ... }]
+
+// map: Transform each item
+const titles = tasks.map(task => task.title);
+// Result: ['Task 1', 'Task 2', 'Task 3']
+
+// reduce: Aggregate data
+const stats = tasks.reduce((acc, task) => {
+  acc[task.status] = (acc[task.status] || 0) + 1;
+  return acc;
+}, {});
+// Result: { pending: 2, completed: 1 }
+```
+
+**6. LocalStorage**
+```javascript
+// CONCEPT: Simple key-value storage in the browser
+
+// Save data (must be a string)
+localStorage.setItem('tasks', JSON.stringify(tasks));
+
+// Load data
+const stored = localStorage.getItem('tasks');
+const tasks = stored ? JSON.parse(stored) : [];
+
+// Remove data
+localStorage.removeItem('tasks');
+```
+
+#### Practice Tasks
+
+1. **Read the code:** Open `session-2-vanilla-js/app.js`
+2. **Console experiments:**
+   ```javascript
+   // Open browser console and try:
+   window.TaskMasterDebug.getTasks()
+   window.TaskMasterDebug.createTask({ title: 'Test', priority: 'high' })
    ```
-   - Show project structure
-   - Explain `index.html`, `main.jsx`, `App.jsx`
+3. **Add features:**
+   - Add a "mark all complete" button
+   - Add task categories
+   - Add due date warnings
 
-3. **React Fundamentals** (30 min)
-   - Components are functions that return JSX
-   - Props: passing data down
-   - JSX rules: className, self-closing tags, {} for expressions
-   - Map over arrays with `key` prop
+#### Common Questions
 
-4. **Component Composition** (30 min)
-   - Container vs Presentational components
-   - Children prop pattern
-   - Reusable UI components: Button, Card, Input
+**Q: Why `e.preventDefault()`?**
+Forms submit to a new page by default. This stops that behavior.
 
-5. **Mob Coding** (40 min)
-   - Build component library together
-   - Create: Button, Card, Badge, Input with variants
-   - Use them to compose a TaskCard
+**Q: What's the difference between `querySelector` and `getElementById`?**
+- `querySelector`: More flexible, uses CSS selectors
+- `getElementById`: Faster, but only works with IDs
 
-#### Key Teaching Points:
-- **Components = Functions:** No magic, just functions returning JSX
-- **Props = Function Parameters:** Read-only, flow downward
-- **JSX ≠ HTML:** It compiles to `React.createElement()` calls
-- **Keys:** Needed for lists so React knows what changed
+**Q: When should I use async/await vs .then()?**
+Both work, but async/await is more readable:
+```javascript
+// .then() style
+fetch(url).then(res => res.json()).then(data => console.log(data));
 
-#### Code Structure to Show:
-```jsx
-// Basic Component (SESSION 3)
+// async/await style (preferred)
+const res = await fetch(url);
+const data = await res.json();
+console.log(data);
+```
+
+#### Resources
+- [JavaScript.info](https://javascript.info/) - Comprehensive guide
+- [MDN: Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+- [Array Methods Cheat Sheet](https://javascript.info/array-methods)
+
+---
+
+### Session 3: React Introduction
+
+#### Concepts Covered
+
+**1. Components (Functions that return JSX)**
+```javascript
+// CONCEPT: UI = function of data
+
+// Simple component
 function Greeting({ name }) {
   return <h1>Hello, {name}!</h1>;
 }
 
-// Composition (SESSION 3)
-function Card({ children, variant }) {
+// Using it
+<Greeting name="Alex" />
+// Renders: <h1>Hello, Alex!</h1>
+```
+
+**2. JSX Rules**
+```javascript
+// CONCEPT: JSX looks like HTML but it's JavaScript
+
+// ❌ Wrong:
+<div class="card">  // class is reserved in JS
+  <img src="..." >  // Not self-closed
+</div>
+
+// ✅ Correct:
+<div className="card">  // Use className
+  <img src="..." />     // Self-close
+</div>
+
+// JavaScript expressions in {}
+<h1>{user.name}</h1>
+<button onClick={() => console.log('Clicked')}>Click</button>
+```
+
+**3. Props (Component Inputs)**
+```javascript
+// CONCEPT: Props flow downward (parent → child)
+
+function Card({ title, children, variant = 'default' }) {
   return (
     <div className={`card card--${variant}`}>
+      <h3>{title}</h3>
       {children}
     </div>
   );
 }
 
-// Using it
-<Card variant="elevated">
-  <Greeting name="Alex" />
-  <Button>Click me</Button>
+// Usage
+<Card title="My Card" variant="elevated">
+  <p>Card content goes here</p>
 </Card>
 ```
 
-#### Common Student Mistakes:
-- Using `class` instead of `className`
-- Forgetting to capitalize component names
-- Not adding `key` to mapped elements
-- Trying to modify props (they're immutable!)
+**4. Lists & Keys**
+```javascript
+// CONCEPT: Keys help React identify which items changed
+
+const tasks = [
+  { id: 1, title: 'Task 1' },
+  { id: 2, title: 'Task 2' }
+];
+
+// ❌ Wrong: Using index as key
+{tasks.map((task, index) => (
+  <TaskCard key={index} task={task} />
+))}
+
+// ✅ Correct: Using unique ID
+{tasks.map(task => (
+  <TaskCard key={task.id} task={task} />
+))}
+```
+
+**5. Component Composition**
+```javascript
+// CONCEPT: Build complex UIs from simple components
+
+// Small, reusable components
+function Button({ children, onClick }) {
+  return <button onClick={onClick}>{children}</button>;
+}
+
+function Card({ children }) {
+  return <div className="card">{children}</div>;
+}
+
+// Compose them
+function TaskCard({ task, onComplete }) {
+  return (
+    <Card>
+      <h3>{task.title}</h3>
+      <Button onClick={() => onComplete(task.id)}>
+        Complete
+      </Button>
+    </Card>
+  );
+}
+```
+
+#### Practice Tasks
+
+1. **Setup:**
+   ```bash
+   npm create vite@latest my-first-app -- --template react
+   cd my-first-app
+   npm install
+   npm run dev
+   ```
+
+2. **Build components:**
+   - Button with variants (primary, secondary)
+   - Card with header and body
+   - Badge for status indicators
+
+3. **Explore reference:** Look at `session-3-6-react-app/src/pages/Dashboard.jsx`
+
+#### Common Questions
+
+**Q: Why do component names start with capital letters?**
+React uses this to distinguish components from HTML tags.
+
+**Q: Can I modify props?**
+No! Props are read-only. To change data, use state (Session 4).
+
+**Q: What's the difference between props and children?**
+`children` is a special prop containing everything between opening and closing tags.
+
+#### Resources
+- [React.dev: Quick Start](https://react.dev/learn)
+- [React.dev: Thinking in React](https://react.dev/learn/thinking-in-react)
 
 ---
 
-### Session 4: React State & Data Flow (2.5 hours)
+### Session 4: State Management
 
-**Reference:** `session-3-6-react-app/src/context/TaskContext.jsx`
+#### Concepts Covered
 
-#### What to Teach:
-1. **useState Hook** (30 min)
-   - Syntax: `const [value, setValue] = useState(initial)`
-   - State triggers re-renders
-   - Never mutate state directly
-   - Functional updates: `setCount(prev => prev + 1)`
+**1. useState (Local State)**
+```javascript
+// CONCEPT: State is data that changes over time
 
-2. **Controlled Forms** (30 min)
-   - Input value tied to state
-   - onChange updates state
-   - Form submission with `e.preventDefault()`
-   - Multi-field forms with object state
+import { useState } from 'react';
 
-3. **Lifting State Up** (30 min)
-   - Parent owns state, children receive via props
-   - Callbacks to modify parent state
-   - When to lift vs keep local
-
-4. **useReducer** (20 min)
-   - For complex state logic
-   - Actions describe WHAT happened
-   - Reducer describes HOW state changes
-   - Pattern: `dispatch({ type: 'ADD_TASK', payload: task })`
-
-#### Example Code Flow:
-```jsx
-// useState (SESSION 4)
 function Counter() {
+  // Declare state: [value, setValue] = useState(initialValue)
   const [count, setCount] = useState(0);
-  return <button onClick={() => setCount(count + 1)}>{count}</button>;
-}
-
-// Controlled Form (SESSION 4)
-function TaskForm({ onSubmit }) {
-  const [title, setTitle] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit({ title });
-    setTitle(''); // Clear form
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input value={title} onChange={e => setTitle(e.target.value)} />
-      <button type="submit">Add</button>
-    </form>
-  );
-}
-
-// useReducer (SESSION 4)
-const taskReducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD':
-      return [...state, action.payload];
-    case 'DELETE':
-      return state.filter(t => t.id !== action.payload);
-    default:
-      return state;
-  }
-};
-
-function TaskApp() {
-  const [tasks, dispatch] = useReducer(taskReducer, []);
 
   return (
     <div>
-      <TaskForm onSubmit={task => dispatch({ type: 'ADD', payload: task })} />
-      <TaskList
-        tasks={tasks}
-        onDelete={id => dispatch({ type: 'DELETE', payload: id })}
-      />
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+
+      {/* ⚠️ Use functional update for callbacks */}
+      <button onClick={() => setCount(prev => prev + 1)}>+1</button>
     </div>
   );
 }
 ```
 
-#### Backend Dev Bridge:
-> "useState is like a class field that persists across function calls. useReducer is like Redux or event sourcing - actions in, new state out. React compares references to detect changes, which is why we never mutate - always create new objects/arrays."
+**2. Immutability (IMPORTANT!)**
+```javascript
+// CONCEPT: Never mutate state directly, always create new objects/arrays
 
-#### Common Pitfalls:
-- Mutating state: `tasks.push(newTask)` ❌ Use `[...tasks, newTask]` ✅
-- Forgetting functional updates: `setCount(count + 1)` in callbacks can be stale
-- Not preventing form default → page refreshes
-- Passing the result of `setState()` instead of the function
+const [tasks, setTasks] = useState([]);
+
+// ❌ Wrong: Mutating
+tasks.push(newTask);
+setTasks(tasks);  // React won't detect change!
+
+// ✅ Correct: Creating new array
+setTasks([...tasks, newTask]);
+
+// ❌ Wrong: Mutating object
+task.completed = true;
+setTask(task);
+
+// ✅ Correct: Creating new object
+setTask({ ...task, completed: true });
+```
+
+**3. Controlled Forms**
+```javascript
+// CONCEPT: Form inputs controlled by React state
+
+function TaskForm({ onSubmit }) {
+  const [formData, setFormData] = useState({
+    title: '',
+    priority: 'medium'
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formData);
+    setFormData({ title: '', priority: 'medium' });  // Reset
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        name="title"
+        value={formData.title}
+        onChange={handleChange}
+      />
+      <select
+        name="priority"
+        value={formData.priority}
+        onChange={handleChange}
+      >
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+      <button type="submit">Add Task</button>
+    </form>
+  );
+}
+```
+
+**4. useReducer (Complex State)**
+```javascript
+// CONCEPT: For state with complex update logic
+
+const initialState = { count: 0, history: [] };
+
+// Reducer: (currentState, action) => newState
+function reducer(state, action) {
+  switch (action.type) {
+    case 'increment':
+      return {
+        count: state.count + 1,
+        history: [...state.history, state.count + 1]
+      };
+    case 'decrement':
+      return {
+        count: state.count - 1,
+        history: [...state.history, state.count - 1]
+      };
+    case 'reset':
+      return initialState;
+    default:
+      return state;
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <div>
+      <p>Count: {state.count}</p>
+      <button onClick={() => dispatch({ type: 'increment' })}>+</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-</button>
+      <button onClick={() => dispatch({ type: 'reset' })}>Reset</button>
+    </div>
+  );
+}
+```
+
+**5. Context API (Global State)**
+```javascript
+// CONCEPT: Share state across components without prop drilling
+
+import { createContext, useContext, useReducer } from 'react';
+
+// 1. Create context
+const TaskContext = createContext();
+
+// 2. Create provider component
+export function TaskProvider({ children }) {
+  const [tasks, dispatch] = useReducer(taskReducer, []);
+
+  const value = {
+    tasks,
+    addTask: (task) => dispatch({ type: 'ADD', payload: task }),
+    deleteTask: (id) => dispatch({ type: 'DELETE', payload: id })
+  };
+
+  return (
+    <TaskContext.Provider value={value}>
+      {children}
+    </TaskContext.Provider>
+  );
+}
+
+// 3. Create custom hook
+export function useTasks() {
+  const context = useContext(TaskContext);
+  if (!context) throw new Error('useTasks must be used within TaskProvider');
+  return context;
+}
+
+// 4. Use in components
+function TaskList() {
+  const { tasks, deleteTask } = useTasks();
+  return (
+    <div>
+      {tasks.map(task => (
+        <div key={task.id}>
+          {task.title}
+          <button onClick={() => deleteTask(task.id)}>Delete</button>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+#### Practice Tasks
+
+1. **Read:** `session-3-6-react-app/src/context/TaskContext.jsx`
+2. **Build:** Task form with validation
+3. **Experiment:** Try removing `...` spread operator and see what breaks
+
+#### Common Questions
+
+**Q: When should I use useState vs useReducer?**
+- useState: Simple state (strings, numbers, booleans)
+- useReducer: Complex state (objects, arrays with multiple operations)
+
+**Q: Why is immutability important?**
+React compares references to detect changes. If you mutate, the reference stays the same, so React won't re-render.
+
+**Q: When should I use Context?**
+When you need to share state across many components (theme, user data, etc.). Don't overuse it!
+
+#### Resources
+- [React.dev: Managing State](https://react.dev/learn/managing-state)
+- [React.dev: useReducer](https://react.dev/reference/react/useReducer)
 
 ---
 
-### Session 5: Effects, Data Fetching & Routing (3 hours)
+### Session 5: Effects & Routing
 
-**Reference:** `session-3-6-react-app/src/hooks/`, `src/pages/`
+#### Concepts Covered
 
-#### What to Teach:
-1. **useEffect** (35 min)
-   - Runs AFTER render
-   - Dependency array controls when it runs
-   - Cleanup function (return value)
-   - Common uses: data fetching, subscriptions, timers
+**1. useEffect (Side Effects)**
+```javascript
+// CONCEPT: Runs after render, handles side effects
 
-2. **Data Fetching in React** (35 min)
-   - Fetch in useEffect
-   - Loading, error, success states
-   - AbortController for cleanup
-   - Handling race conditions
+import { useState, useEffect } from 'react';
 
-3. **Custom Hooks** (30 min)
-   - Extract reusable logic
-   - Must start with "use"
-   - Can use other hooks inside
-   - Example: `useFetch`, `useLocalStorage`
-
-4. **React Router** (40 min)
-   - Setup: BrowserRouter, Routes, Route
-   - Link vs `<a>` tags
-   - useParams for URL params
-   - useNavigate for programmatic navigation
-   - Navigate component for redirects
-
-5. **Mob Coding** (20 min)
-   - Add routing to capstone
-   - Create detail page with URL param
-
-#### Code Examples:
-```jsx
-// useEffect (SESSION 5)
 function UserProfile({ userId }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
+    // This runs AFTER component renders
 
-    fetch(`/api/users/${userId}`)
-      .then(res => res.json())
-      .then(data => {
-        setUser(data);
-        setLoading(false);
-      });
-  }, [userId]); // Re-run when userId changes
+    async function fetchUser() {
+      setLoading(true);
+      const res = await fetch(`/api/users/${userId}`);
+      const data = await res.json();
+      setUser(data);
+      setLoading(false);
+    }
 
-  if (loading) return <Spinner />;
-  return <div>{user.name}</div>;
+    fetchUser();
+  }, [userId]);  // Re-run when userId changes
+
+  if (loading) return <p>Loading...</p>;
+  return <h1>{user.name}</h1>;
 }
+```
 
-// Custom Hook (SESSION 5)
+**2. Effect Cleanup**
+```javascript
+// CONCEPT: Clean up subscriptions, timers, etc.
+
+useEffect(() => {
+  // Setup
+  const timer = setInterval(() => {
+    console.log('Tick');
+  }, 1000);
+
+  // Cleanup function (runs before next effect and on unmount)
+  return () => {
+    clearInterval(timer);
+  };
+}, []);
+```
+
+**3. Dependency Array Rules**
+```javascript
+// No array: Run after EVERY render (usually wrong!)
+useEffect(() => {
+  console.log('Runs every render');
+});
+
+// Empty array: Run ONCE on mount
+useEffect(() => {
+  console.log('Runs once');
+}, []);
+
+// With dependencies: Run when dependencies change
+useEffect(() => {
+  console.log('Runs when userId changes');
+}, [userId]);
+```
+
+**4. Custom Hooks**
+```javascript
+// CONCEPT: Extract reusable logic
+
+// Custom hook for data fetching
 function useFetch(url) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -351,13 +800,22 @@ function useFetch(url) {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch(url, { signal: controller.signal })
-      .then(res => res.json())
-      .then(setData)
-      .catch(setError)
-      .finally(() => setLoading(false));
+    async function fetchData() {
+      try {
+        setLoading(true);
+        const res = await fetch(url, { signal: controller.signal });
+        const json = await res.json();
+        setData(json);
+      } catch (err) {
+        if (err.name !== 'AbortError') setError(err);
+      } finally {
+        setLoading(false);
+      }
+    }
 
-    return () => controller.abort(); // Cleanup
+    fetchData();
+
+    return () => controller.abort();  // Cleanup
   }, [url]);
 
   return { data, loading, error };
@@ -367,16 +825,24 @@ function useFetch(url) {
 function Users() {
   const { data: users, loading, error } = useFetch('/api/users');
 
-  if (loading) return <Spinner />;
-  if (error) return <Error message={error} />;
-  return <UserList users={users} />;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  return <ul>{users.map(u => <li key={u.id}>{u.name}</li>)}</ul>;
 }
+```
 
-// React Router (SESSION 5)
+**5. React Router**
+```javascript
+// CONCEPT: Client-side routing (no page reloads)
+
+import { BrowserRouter, Routes, Route, Link, useParams, useNavigate } from 'react-router-dom';
+
+// Setup routes
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <nav>
+        {/* Link instead of <a> to prevent page reload */}
         <Link to="/">Home</Link>
         <Link to="/tasks">Tasks</Link>
       </nav>
@@ -387,98 +853,103 @@ function App() {
         <Route path="/tasks/:id" element={<TaskDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 
-// Using URL params
+// Access URL parameters
 function TaskDetail() {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const { data: task, loading } = useFetch(`/api/tasks/${id}`);
-
-  if (loading) return <Spinner />;
-  if (!task) return <NotFound />;
+  const { id } = useParams();  // Get :id from URL
+  const navigate = useNavigate();  // For programmatic navigation
 
   return (
     <div>
-      <h1>{task.title}</h1>
+      <h1>Task {id}</h1>
       <button onClick={() => navigate('/tasks')}>Back</button>
     </div>
   );
 }
 ```
 
-#### useEffect Dependency Rules:
-- `[]` - Run once on mount
-- `[dep]` - Run when dep changes
-- No array - Run after every render (usually wrong!)
+#### Practice Tasks
 
-#### Common Mistakes:
-- Missing dependencies in useEffect → stale closures
-- Not cleaning up (subscriptions, timers, event listeners)
-- Fetching in the component body instead of useEffect
-- Using `<a>` instead of `<Link>` → full page reload
+1. **Read:** Study the custom hook pattern
+2. **Build:** Create `useLocalStorage` hook
+3. **Explore:** Add routing to your capstone
+
+#### Common Questions
+
+**Q: Why is my useEffect running infinitely?**
+You're probably missing dependencies or setting state that triggers the effect:
+```javascript
+// ❌ Infinite loop
+useEffect(() => {
+  setCount(count + 1);  // Triggers re-render → effect runs again
+}, [count]);
+
+// ✅ Fixed: Remove from dependencies if intentional
+useEffect(() => {
+  const timer = setInterval(() => setCount(c => c + 1), 1000);
+  return () => clearInterval(timer);
+}, []);  // Empty array
+```
+
+**Q: When should I create a custom hook?**
+When you have logic used in multiple components, or when you want to extract complex logic for clarity.
+
+**Q: Link vs <a> tag?**
+Always use `<Link>` in React apps to prevent full page reloads.
+
+#### Resources
+- [React.dev: useEffect](https://react.dev/reference/react/useEffect)
+- [React Router Docs](https://reactrouter.com/)
 
 ---
 
-### Session 6: Styling, Polish & Deployment (3 hours)
+### Session 6: Styling & Deployment
 
-**Reference:** Ready for Tailwind in `session-3-6-react-app/`
+#### Concepts Covered
 
-#### What to Teach:
-1. **Tailwind CSS** (35 min)
-   ```bash
-   npm install -D tailwindcss postcss autoprefixer
-   npx tailwindcss init -p
-   ```
-   - Utility-first approach
-   - Responsive prefixes: `sm:`, `md:`, `lg:`
-   - Hover states: `hover:bg-blue-700`
-   - Dark mode: `dark:bg-gray-800`
+**1. Tailwind CSS (Utility-First)**
+```javascript
+// CONCEPT: Compose styles from utility classes
 
-2. **Component Styling Patterns** (35 min)
-   - Variant props with Tailwind
-   - Conditional classes with template literals
-   - Common patterns: buttons, cards, forms
+// Instead of writing CSS:
+// .button-primary {
+//   background-color: blue;
+//   color: white;
+//   padding: 0.5rem 1rem;
+//   border-radius: 0.5rem;
+// }
 
-3. **Loading & Error States** (30 min)
-   - Skeleton screens
-   - Spinner components
-   - Empty states with CTAs
-   - Error boundaries (class components)
+// Use utility classes:
+<button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+  Click me
+</button>
 
-4. **Animations** (20 min)
-   - CSS transitions for hover effects
-   - Framer Motion for complex animations (optional)
-   - Tailwind animate utilities
+// Responsive design:
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  {/* 1 column on mobile, 2 on tablet, 3 on desktop */}
+</div>
+```
 
-5. **Deployment** (30 min)
-   ```bash
-   npm install -g vercel
-   vercel login
-   vercel --prod
-   ```
-   - Build for production
-   - Environment variables
-   - CDN benefits
+**2. Component Variants**
+```javascript
+// CONCEPT: Reusable components with style variants
 
-#### Tailwind Patterns:
-```jsx
-// Button with variants
 function Button({ children, variant = 'primary', size = 'md', ...props }) {
   const baseClasses = 'rounded font-medium transition-colors';
 
   const variants = {
     primary: 'bg-blue-600 text-white hover:bg-blue-700',
     secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300',
-    danger: 'bg-red-600 text-white hover:bg-red-700',
+    danger: 'bg-red-600 text-white hover:bg-red-700'
   };
 
   const sizes = {
     sm: 'px-3 py-1.5 text-sm',
     md: 'px-4 py-2 text-base',
-    lg: 'px-6 py-3 text-lg',
+    lg: 'px-6 py-3 text-lg'
   };
 
   return (
@@ -491,8 +962,18 @@ function Button({ children, variant = 'primary', size = 'md', ...props }) {
   );
 }
 
-// Loading state
-function TaskList({ tasks, loading, error }) {
+// Usage
+<Button variant="primary" size="lg">Save</Button>
+<Button variant="danger" size="sm">Delete</Button>
+```
+
+**3. Loading States**
+```javascript
+// CONCEPT: Show feedback while data loads
+
+function TaskList() {
+  const { data: tasks, loading, error } = useFetch('/api/tasks');
+
   if (loading) {
     return (
       <div className="flex justify-center py-12">
@@ -504,8 +985,8 @@ function TaskList({ tasks, loading, error }) {
   if (error) {
     return (
       <div className="text-center py-12 text-red-600">
-        <p>Something went wrong: {error}</p>
-        <button className="mt-4 text-blue-600 hover:underline">Try again</button>
+        <p>Failed to load tasks</p>
+        <button onClick={() => window.location.reload()}>Retry</button>
       </div>
     );
   }
@@ -513,219 +994,251 @@ function TaskList({ tasks, loading, error }) {
   if (tasks.length === 0) {
     return (
       <div className="text-center py-12 text-gray-500">
-        <p className="text-lg mb-4">No tasks yet</p>
+        <p>No tasks yet</p>
         <Button>Create your first task</Button>
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="grid gap-4">
       {tasks.map(task => <TaskCard key={task.id} task={task} />)}
     </div>
   );
 }
 ```
 
----
-
-## 💡 Teaching Tips
-
-### For Backend Developers
-
-Use these analogies:
-
-| Frontend Concept | Backend Analogy |
-|-----------------|----------------|
-| Components | Microservices - single responsibility |
-| Props | Function parameters - immutable input |
-| State | Database - mutable data store |
-| useEffect | Lifecycle hooks (@PostConstruct) |
-| Context API | Dependency injection |
-| React Router | Controller routing (Express, Spring) |
-| Custom hooks | Service layer - reusable logic |
-| Fetch/Axios | HTTP client (RestTemplate, Axios) |
-
-### Common Backend Dev Mindset Shifts
-
-1. **Declarative vs Imperative**
-   - Backend: "How to do it" (imperative)
-   - Frontend: "What it should look like" (declarative)
-
-2. **Data Flow**
-   - Backend: Stateless requests, database is source of truth
-   - Frontend: Stateful components, props flow down
-
-3. **Thinking in Components**
-   - Backend: Think in services and layers
-   - Frontend: Think in UI components and composition
-
-### Debugging Tips to Teach
-
-1. **React DevTools** - Inspect component tree, props, state
-2. **Console.log** - Still works! Log render cycles to understand flow
-3. **Debugger** - Set breakpoints in useEffect, event handlers
-4. **Network Tab** - See API calls, response times
-
----
-
-## 📚 Additional Resources for Students
-
-### Practice Challenges
-After each session, students can:
-
-**Session 1:** Recreate layouts from dribbble.com
-**Session 2:** Build a Pokemon search using PokeAPI
-**Session 3:** Component-ize their portfolio from Session 1
-**Session 4:** Add a todo app with filters
-**Session 5:** Integrate GitHub API for profile viewer
-**Session 6:** Polish and deploy their capstone
-
-### Recommended Reading
-- [MDN Web Docs](https://developer.mozilla.org/) - Reference
-- [React.dev](https://react.dev/) - Official React docs
-- [JavaScript.info](https://javascript.info/) - Deep JavaScript
-- [CSS Tricks](https://css-tricks.com/) - Layout guides
-
-### Video Resources
-- Fireship (quick concept overviews)
-- Web Dev Simplified (in-depth tutorials)
-- Theo - t3.gg (modern practices)
-
----
-
-## 🎓 Session Execution Tips
-
-### Before Each Session
-1. Open reference code in your editor
-2. Have browser DevTools ready
-3. Prepare 2-3 "stumper" debugging scenarios
-4. Have the previous week's assignment solution ready
-
-### During Sessions
-1. **Code live** - Don't copy-paste completed code
-2. **Make mistakes** - Then fix them together
-3. **Ask questions** - "What do you think will happen?"
-4. **Use analogies** - Especially for backend devs
-
-### After Sessions
-1. Push your live-coded examples to repo
-2. Share solution to assignment in a separate branch
-3. Encourage students to share their solutions
-4. Review pull requests async if possible
-
----
-
-## 🚀 Running the Projects
-
-### HTML/CSS Version (Session 1-2)
+**4. Deployment to Vercel**
 ```bash
-cd session-1-2-html-css
-# Open index.html in browser (or use Live Server in VS Code)
+# CONCEPT: Deploy your app to production
+
+# 1. Install Vercel CLI
+npm install -g vercel
+
+# 2. Login
+vercel login
+
+# 3. Deploy
+vercel --prod
+
+# Your app is now live! 🎉
 ```
 
-### Vanilla JS Version (Session 2)
-```bash
-cd session-2-vanilla-js
-# Open index.html in browser
-# Works completely offline - no build needed!
+#### Practice Tasks
+
+1. **Install Tailwind:**
+   ```bash
+   npm install -D tailwindcss postcss autoprefixer
+   npx tailwindcss init -p
+   ```
+
+2. **Convert styles** from CSS to Tailwind
+3. **Add loading states** to all data fetching
+4. **Deploy** your capstone project
+
+#### Common Questions
+
+**Q: Isn't Tailwind just inline styles?**
+No! It's utility classes that compile to optimized CSS. Benefits: consistency, responsive design, purging unused styles.
+
+**Q: How do I handle dark mode?**
+Tailwind has built-in dark mode support:
+```javascript
+<div className="bg-white dark:bg-gray-800">
+  {/* Auto switches based on system preference */}
+</div>
 ```
 
-### React Version (Sessions 3-6)
-```bash
-cd session-3-6-react-app
-npm install
-npm run dev
-# Open http://localhost:5173
+**Q: What if I need custom colors?**
+Extend Tailwind config:
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        brand: '#FF6B6B'
+      }
+    }
+  }
+}
 ```
+
+#### Resources
+- [Tailwind CSS Docs](https://tailwindcss.com/docs)
+- [Vercel Deployment Guide](https://vercel.com/docs)
 
 ---
 
-## 🐛 Common Issues & Solutions
+## 🎯 Learning Tips
 
-### Students Can't See Changes
-- Check if file is saved
-- Hard refresh: Ctrl+Shift+R (Cmd+Shift+R on Mac)
-- Clear cache
-- Check if correct file is linked
+### 1. **Build, Don't Just Read**
+Code along with every example. Type it out yourself, don't copy-paste.
 
-### React App Won't Start
-- Delete `node_modules` and `package-lock.json`, run `npm install`
-- Check Node version: `node -v` (should be 18+)
-- Port 5173 already in use? Kill process or use `--port 3000`
+### 2. **Break Things**
+Comment out code, change values, see what happens. Best way to learn!
 
-### CSS Not Working
-- Check selector specificity
-- Look for typos in class names
-- Verify file is linked: `<link rel="stylesheet" href="styles.css">`
-- Check browser DevTools "Elements" tab to see computed styles
+### 3. **Use DevTools**
+- **Elements tab:** Inspect HTML/CSS
+- **Console:** Test JavaScript
+- **Network:** See API calls
+- **React DevTools:** Inspect components
+
+### 4. **Read Error Messages**
+React errors are descriptive. They tell you:
+- What went wrong
+- Where it happened
+- How to fix it
+
+### 5. **Google Smart**
+Instead of "react not working", search:
+- "react useEffect infinite loop"
+- "react router useParams undefined"
+- "tailwind css not applying"
+
+### 6. **Ask Questions**
+In sessions, on assignments, anytime! Questions mean you're thinking.
 
 ---
 
-## 📊 Progress Tracking
+## 🐛 Common Errors & Solutions
 
-Track student progress with this rubric:
+### "Cannot read property 'map' of undefined"
+**Problem:** Trying to map over data that hasn't loaded yet
+```javascript
+// ❌ Error if tasks is undefined
+{tasks.map(task => <TaskCard key={task.id} task={task} />)}
 
-### Session Completion Checklist
+// ✅ Fixed: Check first
+{tasks?.map(task => <TaskCard key={task.id} task={task} />)}
+// or
+{tasks && tasks.map(task => <TaskCard key={task.id} task={task} />)}
+```
 
-**Session 1:**
+### "Each child in a list should have a unique key prop"
+**Problem:** Missing `key` when rendering lists
+```javascript
+// ❌ Missing key
+{tasks.map(task => <TaskCard task={task} />)}
+
+// ✅ Fixed: Add unique key
+{tasks.map(task => <TaskCard key={task.id} task={task} />)}
+```
+
+### "Cannot update a component while rendering a different component"
+**Problem:** Calling setState directly in render
+```javascript
+// ❌ Wrong: setState in render
+function Component() {
+  setCount(5);  // Causes infinite loop!
+  return <div>{count}</div>;
+}
+
+// ✅ Fixed: Use useEffect
+function Component() {
+  useEffect(() => {
+    setCount(5);
+  }, []);
+  return <div>{count}</div>;
+}
+```
+
+### "404 on page refresh (deployed app)"
+**Problem:** React Router needs server configuration
+**Solution:** Vercel handles this automatically. For other hosts, configure rewrites.
+
+---
+
+## 📊 Progress Checklist
+
+Track your journey:
+
+### Session 1
 - [ ] Built responsive layout with Flexbox
 - [ ] Created 2D layout with Grid
-- [ ] Understands media queries
+- [ ] Understand CSS custom properties
 - [ ] Completed portfolio assignment
 
-**Session 2:**
-- [ ] Manipulated DOM programmatically
+### Session 2
+- [ ] Manipulated DOM with JavaScript
 - [ ] Used event delegation
 - [ ] Fetched data from API
-- [ ] Completed interactive directory assignment
+- [ ] Completed user directory assignment
 
-**Session 3:**
-- [ ] Set up Vite + React project
-- [ ] Created 5+ reusable components
+### Session 3
+- [ ] Set up React project
+- [ ] Created 5+ components
 - [ ] Used props effectively
-- [ ] Started capstone project
+- [ ] Started capstone
 
-**Session 4:**
-- [ ] Implemented CRUD with useState/useReducer
-- [ ] Created controlled forms
-- [ ] Lifted state appropriately
-- [ ] Added full interactivity to capstone
+### Session 4
+- [ ] Implemented state with useState
+- [ ] Used useReducer for complex state
+- [ ] Built controlled forms
+- [ ] Added CRUD to capstone
 
-**Session 5:**
-- [ ] Used useEffect for data fetching
+### Session 5
+- [ ] Used useEffect correctly
 - [ ] Created custom hooks
-- [ ] Implemented routing with React Router
-- [ ] Integrated real API into capstone
+- [ ] Added routing
+- [ ] Integrated real API
 
-**Session 6:**
-- [ ] Applied Tailwind CSS consistently
-- [ ] Implemented loading/error states
+### Session 6
+- [ ] Styled with Tailwind
+- [ ] Added loading/error states
 - [ ] Deployed to production
-- [ ] Completed capstone project
+- [ ] Completed capstone!
 
 ---
 
-## 🎉 Success Metrics
+## 🚀 Next Steps
 
-Students are ready when they can:
+After completing this course, you're ready for:
 
-1. **Start a project from scratch** without guidance
-2. **Debug common errors** independently
-3. **Read documentation** and apply new concepts
-4. **Think in components** when designing UI
-5. **Confidently explain** what their code does
+### Immediate (Week 3-4)
+- Add TypeScript to your capstone
+- Learn form libraries (React Hook Form)
+- Explore component libraries (shadcn/ui)
+
+### Short Term (Month 2-3)
+- Learn Next.js (React framework)
+- Dive into testing (Vitest, React Testing Library)
+- Advanced CSS (animations, advanced layouts)
+
+### Long Term (6+ months)
+- State management libraries (Zustand, Redux Toolkit)
+- Performance optimization
+- Web accessibility (a11y)
+- Try other frameworks (Vue, Svelte)
+
+### Resources for Continued Learning
+- [Frontend Masters](https://frontendmasters.com/) - Professional courses
+- [React.dev](https://react.dev/) - Official docs
+- [Josh Comeau's Blog](https://www.joshwcomeau.com/) - CSS mastery
+- [ui.dev](https://ui.dev/) - Deep dives
 
 ---
 
-## 📧 Questions?
+## 🎓 Final Thoughts
 
-This is your reference implementation. Feel free to:
-- Modify examples to fit your teaching style
-- Add more examples for specific student needs
-- Simplify if moving too fast
-- Add complexity for advanced students
+**You don't need to know everything.** The goal is to:
+1. Understand core concepts
+2. Know where to find answers
+3. Feel confident building
 
-**Remember:** The goal is confidence, not perfection. Students should feel empowered to build, not intimidated by complexity.
+**You're not an imposter.** Everyone struggles at first. The difference between beginners and experts is experts struggled longer.
 
-Good luck with your mentorship program! 🚀
+**Build things!** Your best learning happens when you're solving real problems for projects you care about.
+
+Good luck on your frontend journey! 🚀
+
+---
+
+## 📧 Need Help?
+
+- During sessions: Ask your mentor
+- Between sessions: Use the reference code
+- Stuck on concepts: Re-watch session recordings
+- Want to dig deeper: Check the resources in each section
+
+Remember: Struggling is part of learning. Keep building! 💪

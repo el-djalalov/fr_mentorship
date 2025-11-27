@@ -41,6 +41,7 @@ lerna-debug.log*
 
 # Mentor's plan file (as requested - keep this private)
 plan.md
+README.md
 LESSON_PLAN.md
 # OS specific
 Thumbs.db
