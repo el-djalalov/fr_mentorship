@@ -1,4 +1,4 @@
-# Frontend Development Mentorship - Mentor's Guide
+# Frontend Development Mentorship
 
 ## 🎯 Project Overview
 
