@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster - Interactive (Vanilla JS)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!--
+        SESSION 2 CONCEPTS DEMONSTRATED:
+        - DOM Manipulation (createElement, appendChild, innerHTML)
+        - Event Handling (click, submit, input events)
+        - Event Delegation (efficient event handling)
+        - Fetch API for data loading
+        - Async/await patterns
+        - LocalStorage for persistence
+        - Dynamic rendering
+    -->
+
+    <nav class="navbar">
+        <div class="logo">TaskMaster</div>
+        <ul class="nav-links">
+            <li><a href="#" class="active" data-view="dashboard">Dashboard</a></li>
+            <li><a href="#" data-view="all-tasks">All Tasks</a></li>
+            <li><a href="#" data-view="settings">Settings</a></li>
+        </ul>
+        <button class="btn btn-primary" id="new-task-btn">New Task</button>
+    </nav>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Filters</h3>
+                <ul class="filter-list" id="status-filters">
+                    <!-- Dynamically generated -->
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Priority</h3>
+                <ul class="filter-list" id="priority-filters">
+                    <!-- Dynamically generated -->
+                </ul>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <div>
+                    <h1>My Tasks</h1>
+                    <p class="subtitle">Manage your daily tasks efficiently</p>
+                </div>
+                <div class="header-actions">
+                    <input
+                        type="search"
+                        class="search-input"
+                        id="search-input"
+                        placeholder="Search tasks...">
+                    <select class="btn btn-secondary" id="sort-select">
+                        <option value="date">Sort by Date</option>
+                        <option value="priority">Sort by Priority</option>
+                        <option value="title">Sort by Title</option>
+                    </select>
+                </div>
+            </header>
+
+            <!-- Stats Section - Will be populated dynamically -->
+            <section class="stats-section" id="stats-section">
+                <!-- Dynamically generated stats cards -->
+            </section>
+
+            <section class="tasks-section">
+                <div class="section-header">
+                    <h2>Active Tasks</h2>
+                    <button class="btn btn-text" id="clear-completed">Clear Completed</button>
+                </div>
+
+                <!-- Loading state -->
+                <div id="loading-state" class="loading-state" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Loading tasks...</p>
+                </div>
+
+                <!-- Error state -->
+                <div id="error-state" class="error-state" style="display: none;">
+                    <p class="error-message"></p>
+                    <button class="btn btn-primary" id="retry-btn">Retry</button>
+                </div>
+
+                <!-- Empty state -->
+                <div id="empty-state" class="empty-state" style="display: none;">
+                    <p>📝 No tasks yet. Create your first task!</p>
+                    <button class="btn btn-primary" id="create-first-task">Create Task</button>
+                </div>
+
+                <!-- Task Grid - Will be populated dynamically -->
+                <div class="task-grid" id="task-grid">
+                    <!-- Dynamically generated task cards -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for creating/editing tasks -->
+    <div class="modal-overlay" id="task-modal" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 id="modal-title">Create New Task</h2>
+                <button class="btn-icon" id="close-modal">&times;</button>
+            </div>
+            <form id="task-form">
+                <div class="form-group">
+                    <label for="task-title-input">Task Title</label>
+                    <input
+                        type="text"
+                        id="task-title-input"
+                        name="title"
+                        required
+                        placeholder="Enter task title">
+                </div>
+
+                <div class="form-group">
+                    <label for="task-description-input">Description</label>
+                    <textarea
+                        id="task-description-input"
+                        name="description"
+                        rows="4"
+                        placeholder="Describe the task..."></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="task-priority-input">Priority</label>
+                        <select id="task-priority-input" name="priority">
+                            <option value="low">Low</option>
+                            <option value="medium" selected>Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="task-due-date-input">Due Date</label>
+                        <input
+                            type="date"
+                            id="task-due-date-input"
+                            name="dueDate">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Create Task</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 TaskMaster. Built during Frontend Mentorship Program.</p>
+        <div class="footer-links">
+            <a href="#">About</a>
+            <a href="#">Documentation</a>
+            <a href="#">Support</a>
+        </div>
+    </footer>
+
+    <!-- Link to JavaScript file -->
+    <script src="app.js"></script>
+</body>
+</html>

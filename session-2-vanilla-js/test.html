@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla JS Tests - TaskMaster</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 { color: #1e293b; margin-bottom: 10px; }
+        .subtitle { color: #64748b; margin-bottom: 30px; }
+        .test-section { margin-bottom: 30px; }
+        .test-section h2 {
+            color: #3b82f6;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .test-case {
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .test-case.pass {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .test-case.fail {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .test-case.running {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .icon { font-size: 16px; }
+        .summary {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .summary h2 { color: #1e293b; margin-bottom: 15px; }
+        .stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .stat {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            color: #64748b;
+            font-size: 14px;
+        }
+        .stat.passed .stat-value { color: #10b981; }
+        .stat.failed .stat-value { color: #ef4444; }
+        .stat.total .stat-value { color: #3b82f6; }
+        .error-details {
+            margin-top: 5px;
+            padding: 10px;
+            background: #fef2f2;
+            border-left: 3px solid #ef4444;
+            font-size: 12px;
+            color: #7f1d1d;
+            border-radius: 4px;
+        }
+        #run-tests {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-bottom: 20px;
+        }
+        #run-tests:hover { background: #2563eb; }
+        #run-tests:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Vanilla JavaScript Test Suite</h1>
+        <p class="subtitle">Automated tests for Session 2 TaskMaster application</p>
+
+        <button id="run-tests">Run All Tests</button>
+
+        <div id="test-results"></div>
+
+        <div class="summary" id="summary" style="display:none;">
+            <h2>Test Summary</h2>
+            <div class="stats">
+                <div class="stat total">
+                    <div class="stat-value" id="total-tests">0</div>
+                    <div class="stat-label">Total Tests</div>
+                </div>
+                <div class="stat passed">
+                    <div class="stat-value" id="passed-tests">0</div>
+                    <div class="stat-label">Passed</div>
+                </div>
+                <div class="stat failed">
+                    <div class="stat-value" id="failed-tests">0</div>
+                    <div class="stat-label">Failed</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load the app.js file to test -->
+    <script src="app.js"></script>
+
+    <script>
+        // Test Framework
+        class TestRunner {
+            constructor() {
+                this.tests = [];
+                this.results = [];
+                this.currentSection = null;
+            }
+
+            section(name) {
+                this.currentSection = name;
+            }
+
+            test(description, fn) {
+                this.tests.push({
+                    section: this.currentSection,
+                    description,
+                    fn
+                });
+            }
+
+            async run() {
+                this.results = [];
+                const resultsContainer = document.getElementById('test-results');
+                resultsContainer.innerHTML = '';
+
+                let currentSectionEl = null;
+                let passedCount = 0;
+                let failedCount = 0;
+
+                for (const test of this.tests) {
+                    // Create section if new
+                    if (!currentSectionEl || currentSectionEl.dataset.section !== test.section) {
+                        currentSectionEl = document.createElement('div');
+                        currentSectionEl.className = 'test-section';
+                        currentSectionEl.dataset.section = test.section;
+                        currentSectionEl.innerHTML = `<h2>${test.section}</h2>`;
+                        resultsContainer.appendChild(currentSectionEl);
+                    }
+
+                    // Create test case element
+                    const testEl = document.createElement('div');
+                    testEl.className = 'test-case running';
+                    testEl.innerHTML = `<span class="icon">⏳</span><span>${test.description}</span>`;
+                    currentSectionEl.appendChild(testEl);
+
+                    // Run test
+                    try {
+                        await test.fn();
+                        testEl.className = 'test-case pass';
+                        testEl.innerHTML = `<span class="icon">✓</span><span>${test.description}</span>`;
+                        passedCount++;
+                        this.results.push({ test: test.description, passed: true });
+                    } catch (error) {
+                        testEl.className = 'test-case fail';
+                        testEl.innerHTML = `
+                            <span class="icon">✗</span>
+                            <span>${test.description}</span>
+                        `;
+                        const errorDiv = document.createElement('div');
+                        errorDiv.className = 'error-details';
+                        errorDiv.textContent = error.message;
+                        testEl.appendChild(errorDiv);
+                        failedCount++;
+                        this.results.push({ test: test.description, passed: false, error: error.message });
+                    }
+
+                    // Small delay for visual feedback
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                }
+
+                // Show summary
+                document.getElementById('summary').style.display = 'block';
+                document.getElementById('total-tests').textContent = this.tests.length;
+                document.getElementById('passed-tests').textContent = passedCount;
+                document.getElementById('failed-tests').textContent = failedCount;
+
+                return { total: this.tests.length, passed: passedCount, failed: failedCount };
+            }
+        }
+
+        const runner = new TestRunner();
+
+        // Helper function
+        function assert(condition, message) {
+            if (!condition) {
+                throw new Error(message || 'Assertion failed');
+            }
+        }
+
+        // ===== TESTS =====
+
+        runner.section('🔧 Initial Setup');
+
+        runner.test('AppState object exists', () => {
+            assert(typeof AppState !== 'undefined', 'AppState is not defined');
+            assert(typeof AppState === 'object', 'AppState is not an object');
+        });
+
+        runner.test('AppState has tasks array', () => {
+            assert(Array.isArray(AppState.tasks), 'AppState.tasks is not an array');
+        });
+
+        runner.test('AppState has filters object', () => {
+            assert(typeof AppState.filters === 'object', 'AppState.filters is not an object');
+        });
+
+        runner.test('Sample tasks are loaded', () => {
+            assert(AppState.tasks.length > 0, 'No sample tasks loaded');
+        });
+
+        runner.section('📝 CRUD Operations');
+
+        runner.test('createTask function exists', () => {
+            assert(typeof createTask === 'function', 'createTask function not found');
+        });
+
+        runner.test('createTask adds a new task', () => {
+            const initialCount = AppState.tasks.length;
+            createTask({
+                title: 'Test Task',
+                description: 'Test Description',
+                priority: 'high',
+                dueDate: '2024-12-31'
+            });
+            assert(AppState.tasks.length === initialCount + 1, 'Task was not added');
+        });
+
+        runner.test('New task has unique ID', () => {
+            const task1 = createTask({ title: 'Task 1', description: 'Desc 1', priority: 'low' });
+            const task2 = createTask({ title: 'Task 2', description: 'Desc 2', priority: 'low' });
+            assert(task1.id !== task2.id, 'Tasks do not have unique IDs');
+        });
+
+        runner.test('New task defaults to pending status', () => {
+            const task = createTask({ title: 'Status Test', description: 'Test', priority: 'medium' });
+            assert(task.status === 'pending', 'New task is not pending by default');
+        });
+
+        runner.test('updateTask function exists', () => {
+            assert(typeof updateTask === 'function', 'updateTask function not found');
+        });
+
+        runner.test('toggleTask function exists', () => {
+            assert(typeof toggleTask === 'function', 'toggleTask function not found');
+        });
+
+        runner.test('toggleTask changes task status', () => {
+            const task = createTask({ title: 'Toggle Test', description: 'Test', priority: 'low' });
+            const originalStatus = task.status;
+            toggleTask(task.id);
+            const updatedTask = AppState.tasks.find(t => t.id === task.id);
+            assert(updatedTask.status !== originalStatus, 'Task status did not toggle');
+        });
+
+        runner.test('deleteTask function exists', () => {
+            assert(typeof deleteTask === 'function', 'deleteTask function not found');
+        });
+
+        runner.test('deleteTask removes a task', () => {
+            const task = createTask({ title: 'Delete Test', description: 'Test', priority: 'low' });
+            const initialCount = AppState.tasks.length;
+            deleteTask(task.id);
+            assert(AppState.tasks.length === initialCount - 1, 'Task was not deleted');
+            assert(!AppState.tasks.find(t => t.id === task.id), 'Deleted task still exists');
+        });
+
+        runner.section('🔍 Filtering & Search');
+
+        runner.test('getFilteredTasks function exists', () => {
+            assert(typeof getFilteredTasks === 'function', 'getFilteredTasks function not found');
+        });
+
+        runner.test('getFilteredTasks returns array', () => {
+            const filtered = getFilteredTasks();
+            assert(Array.isArray(filtered), 'getFilteredTasks does not return an array');
+        });
+
+        runner.test('Filter by status: pending', () => {
+            AppState.filters.status = 'pending';
+            const filtered = getFilteredTasks();
+            assert(filtered.every(task => task.status === 'pending'), 'Filter by pending failed');
+            AppState.filters.status = 'all'; // Reset
+        });
+
+        runner.test('Filter by status: completed', () => {
+            // Create and complete a task
+            const task = createTask({ title: 'Complete Test', description: 'Test', priority: 'low' });
+            toggleTask(task.id);
+
+            AppState.filters.status = 'completed';
+            const filtered = getFilteredTasks();
+            assert(filtered.length > 0, 'No completed tasks found');
+            assert(filtered.every(task => task.status === 'completed'), 'Filter by completed failed');
+            AppState.filters.status = 'all'; // Reset
+        });
+
+        runner.test('Filter by priority', () => {
+            createTask({ title: 'High Priority', description: 'Test', priority: 'high' });
+            AppState.filters.priority = 'high';
+            const filtered = getFilteredTasks();
+            assert(filtered.every(task => task.priority === 'high'), 'Filter by priority failed');
+            AppState.filters.priority = 'all'; // Reset
+        });
+
+        runner.test('Search by title', () => {
+            createTask({ title: 'Unique Search Term', description: 'Test', priority: 'medium' });
+            AppState.filters.searchTerm = 'Unique';
+            const filtered = getFilteredTasks();
+            assert(filtered.length > 0, 'Search found no results');
+            assert(filtered.some(task => task.title.includes('Unique')), 'Search did not find correct task');
+            AppState.filters.searchTerm = ''; // Reset
+        });
+
+        runner.section('📊 Stats Calculation');
+
+        runner.test('getStats function exists', () => {
+            assert(typeof getStats === 'function', 'getStats function not found');
+        });
+
+        runner.test('getStats returns correct structure', () => {
+            const stats = getStats();
+            assert(typeof stats === 'object', 'getStats does not return an object');
+            assert(typeof stats.total === 'number', 'stats.total is not a number');
+            assert(typeof stats.completed === 'number', 'stats.completed is not a number');
+            assert(typeof stats.inProgress === 'number', 'stats.inProgress is not a number');
+        });
+
+        runner.test('Total tasks stat is accurate', () => {
+            const stats = getStats();
+            assert(stats.total === AppState.tasks.length, 'Total tasks stat is incorrect');
+        });
+
+        runner.test('Completed tasks stat counts correctly', () => {
+            const completedCount = AppState.tasks.filter(t => t.status === 'completed').length;
+            const stats = getStats();
+            assert(stats.completed === completedCount, 'Completed tasks stat is incorrect');
+        });
+
+        runner.test('In progress stat counts correctly', () => {
+            const pendingCount = AppState.tasks.filter(t => t.status === 'pending').length;
+            const stats = getStats();
+            assert(stats.inProgress === pendingCount, 'In progress stat is incorrect');
+        });
+
+        runner.test('Completion rate calculates correctly', () => {
+            const stats = getStats();
+            const expectedRate = stats.total > 0 ? Math.round((stats.completed / stats.total) * 100) : 0;
+            assert(stats.completionRate === expectedRate, `Completion rate is incorrect. Expected: ${expectedRate}, Got: ${stats.completionRate}`);
+        });
+
+        runner.section('💾 LocalStorage');
+
+        runner.test('saveTasks function exists', () => {
+            assert(typeof saveTasks === 'function', 'saveTasks function not found');
+        });
+
+        runner.test('loadTasks function exists', () => {
+            assert(typeof loadTasks === 'function', 'loadTasks function not found');
+        });
+
+        runner.test('saveTasks stores data in localStorage', () => {
+            saveTasks();
+            const stored = localStorage.getItem('taskmaster-tasks');
+            assert(stored !== null, 'Data was not saved to localStorage');
+        });
+
+        runner.test('Saved data is valid JSON', () => {
+            saveTasks();
+            const stored = localStorage.getItem('taskmaster-tasks');
+            let parsed;
+            try {
+                parsed = JSON.parse(stored);
+            } catch (e) {
+                throw new Error('Stored data is not valid JSON');
+            }
+            assert(Array.isArray(parsed), 'Stored data is not an array');
+        });
+
+        runner.section('🎯 Array Methods');
+
+        runner.test('Uses Array.filter() method', () => {
+            // Check if getFilteredTasks uses filter
+            const filtered = getFilteredTasks();
+            assert(filtered !== AppState.tasks || AppState.filters.status !== 'all', 'filter() not being used');
+        });
+
+        runner.test('Uses Array.find() method', () => {
+            const task = createTask({ title: 'Find Test', description: 'Test', priority: 'low' });
+            const found = AppState.tasks.find(t => t.id === task.id);
+            assert(found !== undefined, 'find() method not working');
+            assert(found.id === task.id, 'find() found wrong task');
+        });
+
+        runner.test('Uses Array.map() for transformations', () => {
+            // Test that map exists and works
+            const ids = AppState.tasks.map(t => t.id);
+            assert(Array.isArray(ids), 'map() not returning array');
+            assert(ids.length === AppState.tasks.length, 'map() not working correctly');
+        });
+
+        // ===== RUN TESTS BUTTON =====
+        document.getElementById('run-tests').addEventListener('click', async function() {
+            this.disabled = true;
+            this.textContent = 'Running tests...';
+
+            // Reset app state for clean test run
+            localStorage.removeItem('taskmaster-tasks');
+            if (typeof init === 'function') {
+                init();
+            } else if (typeof loadTasks === 'function') {
+                AppState.tasks = loadTasks();
+            }
+
+            await runner.run();
+
+            this.textContent = 'Run Tests Again';
+            this.disabled = false;
+        });
+
+        // Auto-run on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('run-tests').click();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

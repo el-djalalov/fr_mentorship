@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"c:\\Users\\User\\Documents\\projects\\fr_mentorship\\session-2-vanilla-js\\styles-temp.css\")",
+      "Bash(move:*)",
+      "Bash(npm create:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(npm run dev:*)",
+      "Bash(cat:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(taskkill:*)",
+      "Bash(nul)",
+      "Bash(del session-1-2-html-cssTEST_SUITE.md session-2-vanilla-jsTEST_SUITE.md session-3-6-react-appTEST_SUITE.md 2)",
+      "Bash(node test.js:*)",
+      "Bash(npm run test:run:*)",
+      "Bash(npx markdownlint:*)",
+      "Bash(markdownlint:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

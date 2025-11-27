@@ -1,0 +1,1026 @@
+/*
+    SESSION 1 CSS CONCEPTS DEMONSTRATED:
+    - CSS Custom Properties (variables) for theming
+    - Flexbox for one-dimensional layouts (navbar, cards, buttons)
+    - CSS Grid for two-dimensional layouts (dashboard, task grid)
+    - Responsive design with media queries
+    - Modern CSS practices (clamp, gap, aspect-ratio)
+    - CSS specificity and cascade
+*/
+
+/* ============================================
+   CSS CUSTOM PROPERTIES (CSS Variables)
+   ============================================
+   These act like constants in programming.
+   Define once, use everywhere. Easy to theme!
+*/
+:root {
+    /* Color Palette */
+    --color-primary: #3b82f6;      /* Blue */
+    --color-primary-dark: #2563eb;
+    --color-primary-light: #dbeafe;
+
+    --color-secondary: #64748b;    /* Slate Gray */
+    --color-secondary-dark: #475569;
+
+    --color-success: #10b981;      /* Green */
+    --color-warning: #f59e0b;      /* Amber */
+    --color-danger: #ef4444;       /* Red */
+
+    --color-bg: #f8fafc;           /* Light background */
+    --color-surface: #ffffff;      /* Card background */
+    --color-border: #e2e8f0;
+
+    --color-text-primary: #1e293b;
+    --color-text-secondary: #64748b;
+    --color-text-muted: #94a3b8;
+
+    /* Spacing Scale (similar to Tailwind) */
+    --spacing-xs: 0.25rem;  /* 4px */
+    --spacing-sm: 0.5rem;   /* 8px */
+    --spacing-md: 1rem;     /* 16px */
+    --spacing-lg: 1.5rem;   /* 24px */
+    --spacing-xl: 2rem;     /* 32px */
+    --spacing-2xl: 3rem;    /* 48px */
+
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-base: 1rem;     /* 16px */
+    --font-size-lg: 1.125rem;   /* 18px */
+    --font-size-xl: 1.25rem;    /* 20px */
+    --font-size-2xl: 1.5rem;    /* 24px */
+    --font-size-3xl: 1.875rem;  /* 30px */
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+    /* Border Radius */
+    --radius-sm: 0.375rem;  /* 6px */
+    --radius-md: 0.5rem;    /* 8px */
+    --radius-lg: 0.75rem;   /* 12px */
+    --radius-xl: 1rem;      /* 16px */
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 200ms ease;
+    --transition-slow: 300ms ease;
+}
+
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg);
+    line-height: 1.6;
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+}
+
+/* ============================================
+   NAVBAR - FLEXBOX DEMONSTRATION
+   ============================================
+   Flexbox is perfect for one-dimensional layouts
+   like navigation bars where items are in a row.
+*/
+.navbar {
+    /* Flexbox properties */
+    display: flex;
+    justify-content: space-between;  /* Space items evenly */
+    align-items: center;             /* Vertically center items */
+
+    /* Styling */
+    background-color: var(--color-surface);
+    padding: var(--spacing-md) var(--spacing-xl);
+    box-shadow: var(--shadow-sm);
+
+    /* Sticky positioning - stays at top when scrolling */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.nav-links {
+    /* Nested flexbox for the list */
+    display: flex;
+    gap: var(--spacing-xl);  /* Modern way to add space between flex items */
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--color-primary);
+}
+
+/* ============================================
+   APP CONTAINER - CSS GRID DEMONSTRATION
+   ============================================
+   Grid is perfect for two-dimensional layouts.
+   Here we create a sidebar + main content layout.
+*/
+.app-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;  /* Sidebar is fixed 280px, content takes remaining space */
+    min-height: calc(100vh - 73px);    /* Full height minus navbar */
+    gap: 0;
+}
+
+/* ============================================
+   SIDEBAR
+   ============================================ */
+.sidebar {
+    background-color: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    padding: var(--spacing-xl);
+    /* Make sidebar scrollable if content overflows */
+    overflow-y: auto;
+}
+
+.sidebar-section {
+    margin-bottom: var(--spacing-xl);
+}
+
+.sidebar-section h3 {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-md);
+}
+
+.filter-list {
+    list-style: none;
+}
+
+.filter-item {
+    /* Flexbox for aligning icon, text, and badge */
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.filter-item:hover {
+    background-color: var(--color-bg);
+}
+
+.filter-item.active {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.filter-icon {
+    font-size: var(--font-size-lg);
+}
+
+.priority-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    /* Different colors for priority levels */
+}
+
+.priority-dot.high {
+    background-color: var(--color-danger);
+}
+
+.priority-dot.medium {
+    background-color: var(--color-warning);
+}
+
+.priority-dot.low {
+    background-color: var(--color-success);
+}
+
+.badge {
+    margin-left: auto;  /* Push badge to the right */
+    background-color: var(--color-bg);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+.filter-item.active .badge {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+.main-content {
+    padding: var(--spacing-xl);
+    overflow-y: auto;
+}
+
+/* ============================================
+   CONTENT HEADER - FLEXBOX
+   ============================================ */
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-xl);
+    flex-wrap: wrap;  /* Wrap on small screens */
+    gap: var(--spacing-md);
+}
+
+.content-header h1 {
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.subtitle {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-base);
+}
+
+.header-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+/* ============================================
+   STATS SECTION - FLEXBOX GRID
+   ============================================
+   Using flexbox with flex-wrap for a responsive grid
+*/
+.stats-section {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+    flex-wrap: wrap;  /* Cards wrap on smaller screens */
+}
+
+.stat-card {
+    /* Flexbox for card layout */
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+
+    background-color: var(--color-surface);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+
+    /* Flex grow to fill available space */
+    flex: 1;
+    min-width: 200px;  /* Minimum width before wrapping */
+
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+}
+
+.stat-content h3 {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-number {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+/* ============================================
+   TASKS SECTION
+   ============================================ */
+.tasks-section {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.section-header h2 {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+}
+
+/* ============================================
+   TASK GRID - CSS GRID DEMONSTRATION
+   ============================================
+   Grid is perfect for card layouts that need
+   to be responsive and evenly spaced.
+*/
+.task-grid {
+    display: grid;
+    /* Auto-fit: Creates as many columns as will fit
+       minmax(300px, 1fr): Each column is min 300px, max equal fraction */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+/* ============================================
+   TASK CARD
+   ============================================ */
+.task-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    transition: all var(--transition-base);
+
+    /* Flexbox for vertical layout */
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.task-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+    border-color: var(--color-primary-light);
+}
+
+/* Completed tasks have reduced opacity */
+.task-card.completed {
+    opacity: 0.7;
+}
+
+.task-card.completed .task-title {
+    text-decoration: line-through;
+    color: var(--color-text-muted);
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.priority-badge {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+}
+
+.priority-badge.high {
+    background-color: #fee2e2;
+    color: var(--color-danger);
+}
+
+.priority-badge.medium {
+    background-color: #fef3c7;
+    color: var(--color-warning);
+}
+
+.priority-badge.low {
+    background-color: #d1fae5;
+    color: var(--color-success);
+}
+
+.task-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+}
+
+.task-description {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
+
+.task-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid var(--color-border);
+}
+
+.task-date {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.task-status {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+}
+
+.task-status.pending {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.task-status.completed {
+    background-color: #d1fae5;
+    color: var(--color-success);
+}
+
+.task-footer {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: auto;  /* Push footer to bottom of card */
+}
+
+/* ============================================
+   BUTTON COMPONENTS
+   ============================================
+   Reusable button styles demonstrating
+   the component-based thinking
+*/
+.btn {
+    /* Base button styles */
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: inherit;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.btn-secondary {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-border);
+}
+
+.btn-text {
+    background-color: transparent;
+    color: var(--color-primary);
+    padding: var(--spacing-sm);
+}
+
+.btn-text:hover {
+    background-color: var(--color-primary-light);
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: var(--font-size-sm);
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    color: var(--color-text-muted);
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.btn-icon:hover {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+}
+
+/* ============================================
+   FORM ELEMENTS
+   ============================================ */
+.search-input {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    width: 250px;
+    transition: all var(--transition-fast);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: var(--spacing-xl);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.footer p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.footer-links a {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-size: var(--font-size-sm);
+    transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+    color: var(--color-primary);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - MEDIA QUERIES
+   ============================================
+   Mobile-first approach: Base styles are for mobile,
+   then we enhance for larger screens.
+*/
+
+/* Tablet and below (768px) */
+@media (max-width: 768px) {
+    /* Switch to single column layout */
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Hide sidebar by default on mobile */
+    .sidebar {
+        display: none;
+        /* In a real app, you'd toggle this with JavaScript */
+    }
+
+    /* Make navbar more compact */
+    .navbar {
+        flex-wrap: wrap;
+        padding: var(--spacing-md);
+    }
+
+    .nav-links {
+        gap: var(--spacing-md);
+    }
+
+    /* Stack header items */
+    .content-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .header-actions {
+        width: 100%;
+    }
+
+    .search-input {
+        width: 100%;
+    }
+
+    /* Single column stats on mobile */
+    .stats-section {
+        flex-direction: column;
+    }
+
+    .stat-card {
+        width: 100%;
+    }
+
+    /* Single column task grid on mobile */
+    .task-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Stack footer items */
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* Small mobile (480px) */
+@media (max-width: 480px) {
+    :root {
+        /* Reduce spacing on very small screens */
+        --spacing-xl: 1.5rem;
+        --spacing-2xl: 2rem;
+    }
+
+    .main-content {
+        padding: var(--spacing-md);
+    }
+
+    .content-header h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    /* Hide less critical elements on very small screens */
+    .task-description {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;  /* Show only 2 lines */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+/* Large screens (1200px+) */
+@media (min-width: 1200px) {
+    /* Wider sidebar on large screens */
+    .app-container {
+        grid-template-columns: 320px 1fr;
+    }
+
+    /* Max 4 columns on very large screens */
+    .task-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================
+   Optimize for printing (bonus: show students
+   that CSS can handle print layouts too!)
+*/
+@media print {
+    .navbar,
+    .sidebar,
+    .footer,
+    .btn {
+        display: none;
+    }
+
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+
+    .task-card {
+        break-inside: avoid;  /* Prevent cards from breaking across pages */
+        page-break-inside: avoid;
+    }
+}
+
+/* ============================================
+   ADDITIONAL STYLES FOR SESSION 2
+   ============================================
+   These styles support the interactive features
+   added with JavaScript
+*/
+
+/* ============================================
+   MODAL OVERLAY & MODAL
+   ============================================ */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	/* Center the modal */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	/* Smooth fade-in animation */
+	animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.modal {
+	background-color: var(--color-surface);
+	border-radius: var(--radius-lg);
+	width: 90%;
+	max-width: 500px;
+	max-height: 90vh;
+	overflow-y: auto;
+	box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+	/* Smooth scale-up animation */
+	animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+	from {
+		transform: translateY(20px);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: var(--spacing-lg) var(--spacing-xl);
+	border-bottom: 1px solid var(--color-border);
+}
+
+.modal-header h2 {
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+	color: var(--color-text-primary);
+}
+
+.modal-footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: var(--spacing-md);
+	padding-top: var(--spacing-lg);
+}
+
+/* ============================================
+   FORM STYLES
+   ============================================ */
+#task-form {
+	padding: var(--spacing-xl);
+}
+
+.form-group {
+	margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+	display: block;
+	font-size: var(--font-size-sm);
+	font-weight: 600;
+	color: var(--color-text-primary);
+	margin-bottom: var(--spacing-sm);
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group select {
+	width: 100%;
+	padding: var(--spacing-sm) var(--spacing-md);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	font-size: var(--font-size-base);
+	font-family: inherit;
+	transition: all var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+	outline: none;
+	border-color: var(--color-primary);
+	box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.form-group textarea {
+	resize: vertical;
+	min-height: 100px;
+}
+
+.form-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--spacing-md);
+}
+
+/* ============================================
+   LOADING STATE
+   ============================================ */
+.loading-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: var(--spacing-2xl);
+	gap: var(--spacing-md);
+}
+
+.spinner {
+	width: 40px;
+	height: 40px;
+	border: 4px solid var(--color-border);
+	border-top-color: var(--color-primary);
+	border-radius: 50%;
+	animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.loading-state p {
+	color: var(--color-text-secondary);
+	font-size: var(--font-size-base);
+}
+
+/* ============================================
+   ERROR STATE
+   ============================================ */
+.error-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: var(--spacing-2xl);
+	gap: var(--spacing-md);
+	text-align: center;
+}
+
+.error-message {
+	color: var(--color-danger);
+	font-size: var(--font-size-base);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.empty-state {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: var(--spacing-2xl);
+	gap: var(--spacing-md);
+	text-align: center;
+}
+
+.empty-state p {
+	color: var(--color-text-secondary);
+	font-size: var(--font-size-lg);
+}
+
+/* ============================================
+   DROPDOWN MENU (for task card actions)
+   ============================================ */
+.dropdown {
+	position: relative;
+}
+
+.dropdown-menu {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	background-color: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-lg);
+	min-width: 150px;
+	z-index: 10;
+	margin-top: var(--spacing-xs);
+}
+
+.dropdown-menu button {
+	width: 100%;
+	padding: var(--spacing-sm) var(--spacing-md);
+	border: none;
+	background: none;
+	text-align: left;
+	font-size: var(--font-size-sm);
+	color: var(--color-text-primary);
+	cursor: pointer;
+	transition: background-color var(--transition-fast);
+}
+
+.dropdown-menu button:hover {
+	background-color: var(--color-bg);
+}
+
+.dropdown-menu button:first-child {
+	border-top-left-radius: var(--radius-md);
+	border-top-right-radius: var(--radius-md);
+}
+
+.dropdown-menu button:last-child {
+	border-bottom-left-radius: var(--radius-md);
+	border-bottom-right-radius: var(--radius-md);
+}
+
+.dropdown-menu button.danger {
+	color: var(--color-danger);
+}
+
+.dropdown-menu button.danger:hover {
+	background-color: #fee2e2;
+}
+
+/* ============================================
+   ANIMATIONS & TRANSITIONS
+   ============================================ */
+
+/* Fade-in animation for dynamically added elements */
+.fade-in {
+	animation: fadeIn 0.3s ease;
+}
+
+/* Slide-in animation for cards */
+.slide-in {
+	animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+	from {
+		transform: translateX(-20px);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS FOR MODAL
+   ============================================ */
+@media (max-width: 768px) {
+	.modal {
+		width: 95%;
+		max-height: 85vh;
+	}
+
+	.form-row {
+		grid-template-columns: 1fr;
+	}
+
+	.modal-header {
+		padding: var(--spacing-md) var(--spacing-lg);
+	}
+
+	#task-form {
+		padding: var(--spacing-lg);
+	}
+}

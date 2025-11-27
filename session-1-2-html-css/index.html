@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster - Session 1 & 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!--
+        SESSION 1 CONCEPTS DEMONSTRATED:
+        - Semantic HTML (nav, header, main, section, footer)
+        - Flexbox for navbar and card layouts
+        - CSS Grid for dashboard layout
+        - Responsive design with media queries
+        - Modern CSS practices (CSS custom properties/variables)
+    -->
+
+    <!-- Navigation Bar - Demonstrates Flexbox -->
+    <nav class="navbar">
+        <div class="logo">TaskMaster</div>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Dashboard</a></li>
+            <li><a href="#">All Tasks</a></li>
+            <li><a href="#">Settings</a></li>
+        </ul>
+        <button class="btn btn-primary">New Task</button>
+    </nav>
+
+    <!-- Main Application Container - Demonstrates CSS Grid -->
+    <div class="app-container">
+        <!-- Sidebar - Shows navigation and filters -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Filters</h3>
+                <ul class="filter-list">
+                    <li class="filter-item active">
+                        <span class="filter-icon">📋</span>
+                        <span>All Tasks</span>
+                        <span class="badge">12</span>
+                    </li>
+                    <li class="filter-item">
+                        <span class="filter-icon">⏰</span>
+                        <span>Pending</span>
+                        <span class="badge">7</span>
+                    </li>
+                    <li class="filter-item">
+                        <span class="filter-icon">✅</span>
+                        <span>Completed</span>
+                        <span class="badge">5</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Priority</h3>
+                <ul class="filter-list">
+                    <li class="filter-item">
+                        <span class="priority-dot high"></span>
+                        <span>High Priority</span>
+                        <span class="badge">3</span>
+                    </li>
+                    <li class="filter-item">
+                        <span class="priority-dot medium"></span>
+                        <span>Medium Priority</span>
+                        <span class="badge">6</span>
+                    </li>
+                    <li class="filter-item">
+                        <span class="priority-dot low"></span>
+                        <span>Low Priority</span>
+                        <span class="badge">3</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header Section with Stats -->
+            <header class="content-header">
+                <div>
+                    <h1>My Tasks</h1>
+                    <p class="subtitle">Manage your daily tasks efficiently</p>
+                </div>
+                <div class="header-actions">
+                    <input type="search" class="search-input" placeholder="Search tasks...">
+                    <button class="btn btn-secondary">Sort</button>
+                </div>
+            </header>
+
+            <!-- Stats Cards - Demonstrates Flexbox & Card Design -->
+            <section class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <h3>Total Tasks</h3>
+                        <p class="stat-number">12</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <h3>In Progress</h3>
+                        <p class="stat-number">7</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✨</div>
+                    <div class="stat-content">
+                        <h3>Completed</h3>
+                        <p class="stat-number">5</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-content">
+                        <h3>Completion Rate</h3>
+                        <p class="stat-number">42%</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Task List Section -->
+            <section class="tasks-section">
+                <div class="section-header">
+                    <h2>Active Tasks</h2>
+                    <button class="btn btn-text">View All</button>
+                </div>
+
+                <!-- Task Cards - Demonstrates Grid Layout for Cards -->
+                <div class="task-grid">
+                    <!-- Task Card 1 -->
+                    <article class="task-card">
+                        <div class="task-header">
+                            <span class="priority-badge high">High Priority</span>
+                            <button class="btn-icon">⋯</button>
+                        </div>
+                        <h3 class="task-title">Fix authentication bug in login flow</h3>
+                        <p class="task-description">
+                            Users are experiencing issues logging in with OAuth providers.
+                            Need to debug the callback handling.
+                        </p>
+                        <div class="task-meta">
+                            <span class="task-date">📅 Due: Dec 25, 2024</span>
+                            <span class="task-status pending">Pending</span>
+                        </div>
+                        <div class="task-footer">
+                            <button class="btn btn-small btn-primary">Start</button>
+                            <button class="btn btn-small btn-secondary">Details</button>
+                        </div>
+                    </article>
+
+                    <!-- Task Card 2 -->
+                    <article class="task-card">
+                        <div class="task-header">
+                            <span class="priority-badge medium">Medium Priority</span>
+                            <button class="btn-icon">⋯</button>
+                        </div>
+                        <h3 class="task-title">Update API documentation</h3>
+                        <p class="task-description">
+                            Add examples for the new endpoints and update the authentication section.
+                        </p>
+                        <div class="task-meta">
+                            <span class="task-date">📅 Due: Dec 28, 2024</span>
+                            <span class="task-status pending">Pending</span>
+                        </div>
+                        <div class="task-footer">
+                            <button class="btn btn-small btn-primary">Start</button>
+                            <button class="btn btn-small btn-secondary">Details</button>
+                        </div>
+                    </article>
+
+                    <!-- Task Card 3 -->
+                    <article class="task-card">
+                        <div class="task-header">
+                            <span class="priority-badge low">Low Priority</span>
+                            <button class="btn-icon">⋯</button>
+                        </div>
+                        <h3 class="task-title">Refactor user service tests</h3>
+                        <p class="task-description">
+                            Clean up test code and add missing edge cases for better coverage.
+                        </p>
+                        <div class="task-meta">
+                            <span class="task-date">📅 Due: Jan 5, 2025</span>
+                            <span class="task-status pending">Pending</span>
+                        </div>
+                        <div class="task-footer">
+                            <button class="btn btn-small btn-primary">Start</button>
+                            <button class="btn btn-small btn-secondary">Details</button>
+                        </div>
+                    </article>
+
+                    <!-- Completed Task Card -->
+                    <article class="task-card completed">
+                        <div class="task-header">
+                            <span class="priority-badge high">High Priority</span>
+                            <button class="btn-icon">⋯</button>
+                        </div>
+                        <h3 class="task-title">Implement user profile page</h3>
+                        <p class="task-description">
+                            Create responsive profile page with edit functionality and avatar upload.
+                        </p>
+                        <div class="task-meta">
+                            <span class="task-date">📅 Completed: Dec 20, 2024</span>
+                            <span class="task-status completed">✓ Completed</span>
+                        </div>
+                        <div class="task-footer">
+                            <button class="btn btn-small btn-secondary">View</button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 TaskMaster. Built during Frontend Mentorship Program.</p>
+        <div class="footer-links">
+            <a href="#">About</a>
+            <a href="#">Documentation</a>
+            <a href="#">Support</a>
+        </div>
+    </footer>
+</body>
+</html>
