@@ -11,6 +11,9 @@ node_modules/
 /dist
 *.local
 
+# AI
+
+
 # Environment variables
 .env
 .env.local
